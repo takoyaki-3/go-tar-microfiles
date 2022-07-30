@@ -12,7 +12,7 @@ import (
 	"math"
 	"os"
 	"path/filepath"
-	"strings"
+	// "strings"
 	"sync"
 )
 
@@ -22,19 +22,11 @@ type Storage struct {
 	Core int
 }
 
-func (s *Storage)GetRawFromFile(fileKey string, raw *[]byte)error{
-
-	fileKey = strings.Replace(fileKey,"\\","/",-1)
-	key := FileName2IntegratedFileName(fileKey)[:s.Digit]
-
-  file, err := os.Open(s.Dir+"/"+key+".tar.gz")
-  defer file.Close()
-	if err != nil {
-		return err
-	}
+func (s *Storage)GetRawFromReader(r io.Reader, fileKey string, raw *[]byte)error{
+	// fileKey = strings.Replace(fileKey,"\\","/",-1)
 
   // gzipの展開
-  gzipReader, err := gzip.NewReader(file)
+  gzipReader, err := gzip.NewReader(r)
   defer gzipReader.Close()
 	if err != nil {
 		return err
@@ -58,6 +50,20 @@ func (s *Storage)GetRawFromFile(fileKey string, raw *[]byte)error{
     }
   }
 	return errors.New("file key is not found.")
+}
+
+func (s *Storage)GetRawFromFile(fileKey string, raw *[]byte)error{
+
+	// fileKey = strings.Replace(fileKey,"\\","/",-1)
+	key := FileName2IntegratedFileName(fileKey)[:s.Digit]
+
+  file, err := os.Open(s.Dir+"/"+key+".tar.gz")
+  defer file.Close()
+	if err != nil {
+		return err
+	}
+
+  return s.GetRawFromReader(file,fileKey,raw)
 }
 
 func (s *Storage)DumpToTarFiles(orginDir string) {
@@ -90,7 +96,7 @@ func (s *Storage)DumpToTarFiles(orginDir string) {
 
 				// 再帰的にファイルを取得する
 				if err := filepath.Walk(orginDir, func(path string, info os.FileInfo, err error) error {
-					path = strings.Replace(path,"\\","/",-1)
+					// path = strings.Replace(path,"\\","/",-1)
 					if err != nil {
 						return err
 					}
