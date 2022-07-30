@@ -43,7 +43,6 @@ func (s *Storage)GetRawFromReader(r io.Reader, fileKey string, raw *[]byte)error
 
     // ファイルの特定
     t := tarHeader.Name
-		fmt.Println(t)
     if t == fileKey {
 			*raw,err = ioutil.ReadAll(tarReader)
 			return err
