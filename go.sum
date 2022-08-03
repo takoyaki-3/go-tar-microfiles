@@ -1,2 +1,4 @@
 github.com/takoyaki-3/go-binaryfile v0.0.0-20220722125739-ff41ff779425 h1:mdoUXbKVXxB/YpnpkgdZ7vnkgkA2jlY92CYi3a8pAlo=
 github.com/takoyaki-3/go-binaryfile v0.0.0-20220722125739-ff41ff779425/go.mod h1:gD6iobhQLG1MrxvyNt4Ex8X42PpEiDEO9b91k89DtL8=
+github.com/takoyaki-3/goc v0.0.1 h1:A8+ffyd/BGRz0vqfO9l4r0XOY4Vn7X0QBj9zXhKFink=
+github.com/takoyaki-3/goc v0.0.1/go.mod h1:1G2vCfYcBkWXFVcgXf88O1JNcldnoBg6hX6lGhoNLAc=
