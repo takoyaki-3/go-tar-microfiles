@@ -24,7 +24,8 @@ func main(){
 	fmt.Println("dump tar files.")
 	s := gt.Storage{
 		Dir: "./testData",
-		Digit: 2,
+		Digit: 1,
+		Core: 8,
 	}
 	s.DumpToTarFiles("test")
 
